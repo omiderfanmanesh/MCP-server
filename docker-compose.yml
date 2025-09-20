@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  # Simple MCP Server with JWT token support
+  mcp-server:
+    build: .
+    image: mcp-books-server:latest
+    container_name: mcp-books-server
+    stdin_open: true
+    tty: true
+    restart: unless-stopped

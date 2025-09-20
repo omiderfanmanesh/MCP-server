@@ -1,16 +1,9 @@
 {
   "mcpServers": {
-    "books-mcp": {
-      "command": "/opt/anaconda3/bin/conda",
-      "args": [
-        "run", "-n", "cursor", 
-        "python", "-m", "mcp_server.server"
-      ],
-      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server",
-      "env": {
-        "PYTHONUNBUFFERED": "1",
-        "PYTHONIOENCODING": "utf-8"
-      }
+    "jwt-books-server": {
+      "command": "docker",
+      "args": ["exec", "-i", "mcp-books-server", "python", "-m", "mcp_server.server"],
+      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
     }
   }
 }

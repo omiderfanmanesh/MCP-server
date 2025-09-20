@@ -1,6 +1,57 @@
 # 📚 Books MCP Server
 
-[![MCP](https://img.shields.io/badge/Model%20Context%20Protocol-v1.0-blue)](https://modelcontextprotocol.io/)
+[![MCP](ht## 📖 Documentation
+
+- 📋3. **Install depende## 📖 Documentation
+
+- 📋 **[Setup Guide](docs/SETUP.md)** - Complete IDE integration instructions
+- 🔧 **[API Reference](docs/API.md)** - Detailed tool documentation  
+- 💡 **[Usage Examples](docs/EXAMPLES.md)** - Real-world usage patterns
+- 🔐 **[Authentication Guide](docs/AUTHENTICATION.md)** - Security and user management
+- 🐳 **[Docker Deployment](docs/DOCKER.md)** - Containerized deployment guide**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🐳 Docker Deployment
+
+### Quick Start with Docker
+
+1. **Install Docker** (if not already installed)
+   - [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Mac/Windows
+   - Docker Engine for Linux
+
+2. **Build and run**
+   ```bash
+   # Quick setup
+   ./scripts/docker-setup.sh
+   
+   # Start server (no authentication)
+   docker-compose up mcp-server
+   
+   # Start with authentication
+   docker-compose up mcp-server-auth
+   ```
+
+3. **Create users** (for authenticated version)
+   ```bash
+   # Create admin user
+   ./scripts/manage-users.sh create-admin
+   
+   # Create regular user
+   ./scripts/manage-users.sh create-user john john@example.com
+   ```
+
+### Docker Configuration Options
+
+- **No Authentication**: `docker-compose up mcp-server`
+- **Full Authentication**: `docker-compose up mcp-server-auth`  
+- **Partial Protection**: `docker-compose up mcp-server-partial`
+
+**📖 Complete Docker guide**: [docs/DOCKER.md](docs/DOCKER.md)Setup Guide](docs/SETUP.md)** - Complete IDE integration instructions
+- 🔧 **[API Reference](docs/API.md)** - Detailed tool documentation  
+- 💡 **[Usage Examples](docs/EXAMPLES.md)** - Real-world usage patterns
+- 🔐 **[Authentication Guide](docs/AUTHENTICATION.md)** - Security and user management/img.shields.io/badge/Model%20Context%20Protocol-v1.0-blue)](https://modelcontextprotocol.io/)
 [![Python](https://img.shields.io/badge/Python-3.12+-green)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
@@ -18,6 +69,12 @@ A powerful **Model Context Protocol (MCP) server** that provides seamless access
 - **Real-time Conversion**: Convert between major world currencies
 - **Synthetic Rates**: Reliable exchange rate calculations
 - **Global Coverage**: Support for USD, EUR, GBP, JPY, CAD, and more
+
+### 🔐 Authentication & Security
+- **API Key Authentication**: Secure access with pre-generated keys
+- **JWT Token Support**: Session-based authentication with expiring tokens
+- **Role-based Access Control**: Admin and user roles with fine-grained permissions
+- **Secure Storage**: Hashed API keys and constant-time comparisons
 
 ### 🔧 Technical Excellence
 - **Official MCP SDK**: Built on the robust Model Context Protocol specification
@@ -65,48 +122,56 @@ docker build -t books-mcp-server .
 docker run -i books-mcp-server
 ```
 
-## 🔧 IDE Integration
+## 🔧 Cursor IDE Integration
 
-> **📋 Prerequisites**: Before configuring your IDE, build the Docker image first:
-> ```bash
-> cd /Users/omiderfanmanesh/Projects/MCP-server
-> docker build -t books-mcp-server .
-> ```
+### Quick Setup
 
-### Cursor Setup
+1. **Open Cursor Settings**
+   - Press `Cmd + ,` (Mac) or `Ctrl + ,` (Windows/Linux)
+   - Search for "MCP" or go to Features → Model Context Protocol
 
-1. **Open Cursor Settings**:
-   - Press `Cmd/Ctrl + ,` to open settings
-   - Search for "MCP" or navigate to Features → Model Context Protocol
-
-2. **Add MCP Server Configuration**:
+2. **Add Server Configuration**
    ```json
    {
      "mcpServers": {
-       "books-mcp": {
-         "command": "docker",
-         "args": ["run", "-i", "--rm", "books-mcp-server"],
-         "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
+       "jwt-books-server": {
+         "command": "/opt/anaconda3/bin/python",
+         "args": ["-m", "mcp_server.server"],
+         "cwd": "/Users/omiderfanmanesh/Projects/MCP-server",
+         "env": {
+           "PYTHONUNBUFFERED": "1",
+           "PYTHONIOENCODING": "utf-8"
+         }
        }
      }
    }
    ```
+   
+   **⚠️ Important**: Replace the `cwd` path with your actual project directory!
 
-3. **Verify Connection**:
-   - Look for green status indicator
-   - Check that tools appear in the MCP panel
+3. **Restart Cursor** and test with:
+   - *"Generate a JWT token for username 'test_user'"*
+   - *"Search for books by genre 'Fiction'"*
 
-### GitHub Copilot / Claude Desktop Setup
+**📖 Complete setup guide**: [CURSOR-SETUP.md](CURSOR-SETUP.md)
 
-1. **Locate Configuration File**:
-   - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
-   - **Linux**: `~/.config/claude/claude_desktop_config.json`
+### Alternative: Docker Integration (if you have Docker)
 
-2. **Add Server Configuration**:
-   ```json
-   {
-     "mcpServers": {
+If you prefer using Docker with Cursor:
+
+```json
+{
+  "mcpServers": {
+    "jwt-books-docker": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "mcp-books-server"],
+      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
+    }
+  }
+}
+```
+
+First build the image: `docker build -t mcp-books-server .`
        "books-mcp-server": {
          "command": "docker",
          "args": ["run", "-i", "--rm", "books-mcp-server"],

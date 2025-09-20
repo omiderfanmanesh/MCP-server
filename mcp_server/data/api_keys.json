@@ -1,0 +1,23 @@
+{
+  "d7c8676d-0dda-4679-9fd8-14d2c63524a8": {
+    "key_hash": "3ae70afb087ef67818cc339e460ebff08c1776405a477c11cb0882ae5493c601",
+    "username": "test_user",
+    "email": "test@example.com",
+    "roles": [
+      "user"
+    ],
+    "active": true,
+    "created_at": 1758385700.083359
+  },
+  "1e28fb9b-7a77-4888-a04b-2980ebe03bf4": {
+    "key_hash": "ed42a2284eb9a979b6ac08f962c54f4cdd4ae231d92f0ea112b59778af21af65",
+    "username": "admin_user",
+    "email": "admin@example.com",
+    "roles": [
+      "admin",
+      "user"
+    ],
+    "active": true,
+    "created_at": 1758385703.6897569
+  }
+}
