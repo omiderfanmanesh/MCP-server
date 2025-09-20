@@ -1,0 +1,12 @@
+{
+  "mcp.servers": {
+    "books-mcp": {
+      "command": "python",
+      "args": ["-m", "mcp_server.server"],
+      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server",
+      "env": { 
+        "MCP_LOG": "debug" 
+      }
+    }
+  }
+}
