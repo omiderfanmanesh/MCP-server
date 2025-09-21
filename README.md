@@ -1,208 +1,82 @@
-# 📚 Books MCP Server
+# 🔐 Session-Based Authenticated MCP Server
 
-[![MCP](ht## 📖 Documentation
+A **Model Context Protocol (MCP) server** with **session-based authentication** that provides secure access to books database and currency conversion tools. **Designed specifically for AI assistants** to use authentication seamlessly.
 
-- 📋3. **Install depende## 📖 Documentation
+![Python](https://img.shields.io/badge/python-3.12+-green.svg)
+![MCP](https://img.shields.io/badge/MCP-1.0-orange.svg)
+![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
+![Tests](https://img.shields.io/badge/tests-30%20passing-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-- 📋 **[Setup Guide](docs/SETUP.md)** - Complete IDE integration instructions
-- 🔧 **[API Reference](docs/API.md)** - Detailed tool documentation  
-- 💡 **[Usage Examples](docs/EXAMPLES.md)** - Real-world usage patterns
-- 🔐 **[Authentication Guide](docs/AUTHENTICATION.md)** - Security and user management
-- 🐳 **[Docker Deployment](docs/DOCKER.md)** - Containerized deployment guide**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## ✨ Key Features
 
-## 🐳 Docker Deployment
+### 🔐 **Session-Based Authentication**
+- Simple authentication with username only
+- Automatic session management (1-hour expiration)
+- No token parameters required in tool calls
+- Perfect for AI assistant integration
 
-### Quick Start with Docker
+### 📚 **Books Database**
+- Search books by title, author, genre, year
+- Paginated results with limit/offset
+- Individual book lookup by ID
+- CSV-based storage with Excel conversion
 
-1. **Install Docker** (if not already installed)
-   - [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Mac/Windows
-   - Docker Engine for Linux
+### 💱 **Currency Exchange**
+- Convert between 10+ major currencies
+- Real-time synthetic exchange rates
+- Precise decimal calculations
+- Error handling for invalid currencies
 
-2. **Build and run**
-   ```bash
-   # Quick setup
-   ./scripts/docker-setup.sh
-   
-   # Start server (no authentication)
-   docker-compose up mcp-server
-   
-   # Start with authentication
-   docker-compose up mcp-server-auth
-   ```
+### 🤖 **AI Assistant Optimized**
+- Seamless integration with GitHub Copilot, Claude Desktop, Cursor IDE
+- No complex token passing required
+- Simple authenticate-then-use workflow
+- Comprehensive error messages and hints
 
-3. **Create users** (for authenticated version)
-   ```bash
-   # Create admin user
-   ./scripts/manage-users.sh create-admin
-   
-   # Create regular user
-   ./scripts/manage-users.sh create-user john john@example.com
-   ```
+## 🚀 Quick Start
 
-### Docker Configuration Options
-
-- **No Authentication**: `docker-compose up mcp-server`
-- **Full Authentication**: `docker-compose up mcp-server-auth`  
-- **Partial Protection**: `docker-compose up mcp-server-partial`
-
-**📖 Complete Docker guide**: [docs/DOCKER.md](docs/DOCKER.md)Setup Guide](docs/SETUP.md)** - Complete IDE integration instructions
-- 🔧 **[API Reference](docs/API.md)** - Detailed tool documentation  
-- 💡 **[Usage Examples](docs/EXAMPLES.md)** - Real-world usage patterns
-- 🔐 **[Authentication Guide](docs/AUTHENTICATION.md)** - Security and user management/img.shields.io/badge/Model%20Context%20Protocol-v1.0-blue)](https://modelcontextprotocol.io/)
-[![Python](https://img.shields.io/badge/Python-3.12+-green)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
-
-A powerful **Model Context Protocol (MCP) server** that provides seamless access to a comprehensive books dataset and real-time currency exchange functionality. Built with the official MCP Python SDK for enterprise-grade reliability and performance.
-
-## ✨ Features
-
-### 📖 Books Database
-- **Advanced Search**: Filter by genre, author, publication year, and title
-- **Comprehensive Dataset**: Thousands of books with detailed metadata
-- **Smart Pagination**: Efficient browsing with limit and offset controls
-- **Instant Lookup**: Retrieve specific books by unique ID
-
-### 💱 Currency Exchange
-- **Real-time Conversion**: Convert between major world currencies
-- **Synthetic Rates**: Reliable exchange rate calculations
-- **Global Coverage**: Support for USD, EUR, GBP, JPY, CAD, and more
-
-### 🔐 Authentication & Security
-- **API Key Authentication**: Secure access with pre-generated keys
-- **JWT Token Support**: Session-based authentication with expiring tokens
-- **Role-based Access Control**: Admin and user roles with fine-grained permissions
-- **Secure Storage**: Hashed API keys and constant-time comparisons
-
-### 🔧 Technical Excellence
-- **Official MCP SDK**: Built on the robust Model Context Protocol specification
-- **Docker Ready**: Containerized deployment for any environment
-- **Zero Dependencies**: Minimal external requirements for maximum compatibility
-- **Production Tested**: Stable, timeout-resistant architecture
-
-## � Documentation
-
-- 📋 **[Setup Guide](docs/SETUP.md)** - Complete IDE integration instructions
-- 🔧 **[API Reference](docs/API.md)** - Detailed tool documentation  
-- 💡 **[Usage Examples](docs/EXAMPLES.md)** - Real-world usage patterns
-
-## �🚀 Quick Start
-
-### Prerequisites
-- Python 3.12+
-- Docker (optional)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/omiderfanmanesh/MCP-server.git
-   cd MCP-server
-   ```
-
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the server**
-   ```bash
-   python -m mcp_server.server
-   ```
-
-### Docker Deployment
+### 1. Installation
 
 ```bash
-# Build the image
-docker build -t books-mcp-server .
+# Clone the repository
+git clone https://github.com/omiderfanmanesh/MCP-server.git
+cd MCP-server
 
-# Run the container
-docker run -i books-mcp-server
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-## 🔧 Cursor IDE Integration
+### 2. Run the Server
 
-### Quick Setup
+```bash
+# Start the MCP server
+python -m mcp_server.server
+```
 
-1. **Open Cursor Settings**
-   - Press `Cmd + ,` (Mac) or `Ctrl + ,` (Windows/Linux)
-   - Search for "MCP" or go to Features → Model Context Protocol
+### 3. Basic Usage
 
-2. **Add Server Configuration**
-   ```json
-   {
-     "mcpServers": {
-       "jwt-books-server": {
-         "command": "/opt/anaconda3/bin/python",
-         "args": ["-m", "mcp_server.server"],
-         "cwd": "/Users/omiderfanmanesh/Projects/MCP-server",
-         "env": {
-           "PYTHONUNBUFFERED": "1",
-           "PYTHONIOENCODING": "utf-8"
-         }
-       }
-     }
-   }
-   ```
-   
-   **⚠️ Important**: Replace the `cwd` path with your actual project directory!
+```bash
+# First, authenticate
+"Please authenticate me as 'developer'"
 
-3. **Restart Cursor** and test with:
-   - *"Generate a JWT token for username 'test_user'"*
-   - *"Search for books by genre 'Fiction'"*
+# Then use any protected tools
+"Find me some science fiction books"
+"Convert 100 USD to EUR"
+"Check my session status"
+"Log me out when done"
+```
 
-**📖 Complete setup guide**: [CURSOR-SETUP.md](CURSOR-SETUP.md)
+## 🔧 Integration Examples
 
-### Alternative: Docker Integration (if you have Docker)
+### Cursor IDE Configuration
 
-If you prefer using Docker with Cursor:
+Add to your MCP settings:
 
 ```json
 {
   "mcpServers": {
-    "jwt-books-docker": {
-      "command": "docker",
-      "args": ["run", "--rm", "-i", "mcp-books-server"],
-      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
-    }
-  }
-}
-```
-
-First build the image: `docker build -t mcp-books-server .`
-       "books-mcp-server": {
-         "command": "docker",
-         "args": ["run", "-i", "--rm", "books-mcp-server"],
-         "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
-       }
-     }
-   }
-   ```
-
-3. **Restart Application**: Close and reopen Claude Desktop
-
-### Environment-Specific Setup
-
-**Docker (Recommended)**:
-```json
-{
-  "mcpServers": {
-    "books-mcp": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "books-mcp-server"],
-      "cwd": "/Users/omiderfanmanesh/Projects/MCP-server"
-    }
-  }
-}
-```
-
-**Local Python (Alternative)**:
-```json
-{
-  "mcpServers": {
-    "books-mcp": {
+    "authenticated-books": {
       "command": "python",
       "args": ["-m", "mcp_server.server"],
       "cwd": "/path/to/MCP-server"
@@ -211,335 +85,205 @@ First build the image: `docker build -t mcp-books-server .`
 }
 ```
 
-## 🎯 Usage Examples
+### Claude Desktop Configuration
 
-### Interactive Examples
-
-**Search for books:**
-```
-"Find science fiction books from the 2020s"
-"Show me books by Isaac Asimov"
-"List the top 10 fantasy novels"
-```
-
-**Currency conversion:**
-```
-"Convert 100 USD to EUR"
-"What's 50 GBP in Japanese Yen?"
-"How much is 200 CAD in USD?"
-```
-
-## 🛠 API Reference
-
-### Tools Available
-
-#### `books_query`
-Query the books database with flexible filtering options.
-
-**Parameters:**
-- `id` (optional): Specific book ID
-- `genre` (optional): Filter by genre
-- `year` (optional): Publication year
-- `author` (optional): Author name
-- `title` (optional): Title search (contains)
-- `limit` (optional): Maximum results (default: 10)
-- `offset` (optional): Pagination offset
-
-**Example:**
 ```json
 {
-  "genre": "Science Fiction",
-  "year": "2020",
-  "limit": 5
+  "mcpServers": {
+    "authenticated-books": {
+      "command": "python",
+      "args": ["-m", "mcp_server.server"],
+      "cwd": "/path/to/MCP-server"
+    }
+  }
 }
 ```
 
-#### `exchange_convert`
-Convert amounts between different currencies.
+## 📋 Available Tools
 
-**Parameters:**
-- `from_currency` (required): Source currency code
-- `to_currency` (required): Target currency code
-- `amount` (required): Amount to convert
+| Tool | Description | Authentication Required |
+|------|-------------|------------------------|
+| `authenticate` | Create new user session | ❌ No |
+| `session_status` | Check current session info | ❌ No |
+| `logout` | End current session | ❌ No |
+| `books_query` | Search books database | ✅ Yes |
+| `exchange_convert` | Convert currencies | ✅ Yes |
 
-**Example:**
-```json
-{
-  "from_currency": "USD",
-  "to_currency": "EUR", 
-  "amount": 100.0
-}
+## 🧪 Testing
+
+This project includes a comprehensive test suite with 30 test cases covering all functionality:
+
+```bash
+# Run all tests
+python -m pytest tests/ -v
+
+# Run specific test categories
+python -m pytest tests/test_mcp_server.py::TestSessionAuthentication -v
+python -m pytest tests/test_mcp_server.py::TestBooksRepository -v
+python -m pytest tests/test_mcp_server.py::TestExchangeRates -v
 ```
 
-## 📁 Project Structure
+### Test Coverage
+
+- ✅ JWT token generation and validation
+- ✅ Session authentication flow
+- ✅ Protected operations security
+- ✅ Books database queries and filtering
+- ✅ Currency conversion with all supported currencies
+- ✅ Error handling and edge cases
+- ✅ Integration workflows
+- ✅ Session expiration and cleanup
+
+## 🐳 Docker Deployment
+
+### Local Development
+
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+
+# The server will be available on localhost:8000
+```
+
+### Production Deployment
+
+```bash
+# Build production image
+docker build -t mcp-auth-server .
+
+# Run container
+docker run -p 8000:8000 mcp-auth-server
+```
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [📖 Getting Started](docs/GETTING_STARTED.md) | Complete setup and usage guide |
+| [🏗️ Architecture](docs/ARCHITECTURE.md) | System design and data flow diagrams |
+| [📡 API Reference](docs/API.md) | Complete tool documentation |
+| [🚀 Deployment](docs/DEPLOYMENT.md) | Production deployment guide |
+| [💡 Examples](docs/EXAMPLES.md) | Real-world usage scenarios |
+
+## 🏗️ Architecture Overview
+
+```mermaid
+graph TB
+    A[AI Assistant] -->|authenticate| B[MCP Server]
+    B -->|session_id| C[Session Storage]
+    A -->|books_query| B
+    B -->|check session| C
+    C -->|valid| D[Books Database]
+    A -->|exchange_convert| B
+    B -->|check session| C
+    C -->|valid| E[Exchange Service]
+```
+
+### Core Components
+
+- **Session Manager**: Handles authentication and session lifecycle
+- **Books Repository**: CSV-based database with search capabilities
+- **Exchange Service**: Multi-currency conversion with synthetic rates
+- **Security Layer**: JWT-based session validation
+- **Error Handler**: Comprehensive error messages and recovery hints
+
+## 🔄 Authentication Flow
+
+1. **Authenticate**: `authenticate(username="your_name")`
+   - Generates JWT token
+   - Creates session with 1-hour expiration
+   - Returns session details
+
+2. **Use Tools**: Call any protected operation
+   - Automatic session validation
+   - No token parameters needed
+   - Clear error messages if session expired
+
+3. **Logout**: `logout()`
+   - Cleans up session data
+   - Clears authentication state
+
+## 🌟 Why Session-Based?
+
+Unlike traditional JWT implementations that require token parameters in every API call, this server uses **session-based authentication** specifically designed for AI assistants:
+
+### Problems with Token Parameters
+- AI assistants can't easily pass tokens to tool calls
+- Complex parameter management
+- Poor user experience
+
+### Session-Based Solution
+- ✅ Authenticate once, use forever (until expiration)
+- ✅ No token parameters in tool schemas
+- ✅ Perfect for AI assistant workflows
+- ✅ Automatic session management
+
+## 🛠️ Development
+
+### Project Structure
 
 ```
 MCP-server/
-├── 📄 README.md              # This file
-├── 📄 requirements.txt       # Python dependencies
-├── 🐳 Dockerfile            # Container configuration
-├── 📁 mcp_server/           # Main server package
-│   ├── 🐍 server.py         # MCP server implementation
-│   ├── 📚 books.py          # Books database interface
-│   ├── 💱 exchange.py       # Currency exchange logic
-│   └── 📁 util/            # Utility functions
-│       └── 🔧 xlsx_to_csv.py # Data processing
-├── 📁 sample-data/          # Sample dataset
-│   └── 📊 BooksDatasetClean.xlsx
-├── 📁 data/                 # Generated data files
-│   └── 📄 books.csv         # Processed dataset
-└── 📁 examples/             # Configuration examples
-    └── ⚙️ mcp-server-config.json
+├── mcp_server/           # Main server code
+│   ├── server.py         # MCP server with authentication
+│   ├── books.py          # Books database repository
+│   └── exchange.py       # Currency exchange service
+├── tests/                # Comprehensive test suite
+│   └── test_mcp_server.py
+├── docs/                 # Complete documentation
+│   ├── ARCHITECTURE.md   # System design
+│   ├── API.md           # Tool reference
+│   ├── DEPLOYMENT.md    # Production guide
+│   ├── EXAMPLES.md      # Usage scenarios
+│   └── GETTING_STARTED.md
+├── data/                 # Books database
+│   └── books.csv
+├── docker-compose.yml    # Docker deployment
+├── Dockerfile           # Container definition
+└── requirements.txt     # Dependencies
 ```
 
-## 🔧 Development
+### Development Setup
 
-### Local Development Setup
+```bash
+# Install in development mode
+pip install -e .
 
-1. **Clone and setup**
-   ```bash
-   git clone https://github.com/omiderfanmanesh/MCP-server.git
-   cd MCP-server
-   pip install -r requirements.txt
-   ```
+# Run tests with coverage
+python -m pytest tests/ --cov=mcp_server
 
-2. **Test the server**
-   ```bash
-   python -m mcp_server.server
-   ```
+# Run server with debug logging
+python -m mcp_server.server --debug
+```
 
-3. **Data Processing**
-   The server automatically converts the Excel dataset to CSV format on first run.
-
-### Environment Variables
-
-- `PYTHONUNBUFFERED=1`: Ensures real-time output
-- `PYTHONIOENCODING=utf-8`: Handles international characters
-
-### Debugging
-
-Check server logs for troubleshooting:
-- MCP clients typically log to application-specific directories
-- Use `--verbose` or debug mode in your MCP client
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Development Guidelines
-
-1. Follow PEP 8 style guidelines
-2. Add tests for new features
-3. Update documentation as needed
-4. Ensure Docker builds successfully
-
-## 📊 Dataset Information
-
-The included sample dataset contains:
-- **Format**: Excel/CSV with structured book metadata
-- **Fields**: Title, Author, Genre, Publication Year, and more
-- **Size**: Thousands of entries for comprehensive testing
-- **Source**: Curated collection of popular literature
-
-## 🔒 Security & Privacy
-
-- **No External APIs**: All processing happens locally
-- **Data Privacy**: Your data never leaves your environment
-- **Secure Communication**: Standard MCP protocol security
-- **No Telemetry**: Zero tracking or data collection
-
-## 📝 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🤝 Contributing
 
-- Built with the [Model Context Protocol](https://modelcontextprotocol.io/)
-- Powered by the [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
-- Sample data curated for educational and testing purposes
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 🔗 Links
+
+- [Model Context Protocol Specification](https://modelcontextprotocol.io/)
+- [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
+- [Claude Desktop Integration](https://claude.ai/desktop)
+- [Cursor IDE](https://cursor.sh/)
 
 ## 📞 Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/omiderfanmanesh/MCP-server/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/omiderfanmanesh/MCP-server/discussions)
-- 📚 **Documentation**: [MCP Specification](https://spec.modelcontextprotocol.io/)
+- 📧 Email: [Your Email]
+- 🐛 Issues: [GitHub Issues](https://github.com/omiderfanmanesh/MCP-server/issues)
+- 📖 Docs: [Documentation](docs/)
+- 💬 Discussions: [GitHub Discussions](https://github.com/omiderfanmanesh/MCP-server/discussions)
 
 ---
 
-<div align="center">
-
-**[⭐ Star this repo](https://github.com/omiderfanmanesh/MCP-server)** if you find it useful!
-
-Made with ❤️ for the MCP community
-
-</div>
-
-
-
-1. Build the image:**Run**
-
-```bash- Install dependencies: `pip install mcp`
-
-docker build -t books-mcp .- Start the MCP server over stdio:
-
-```  - `python -m mcp_server.sdk_server`
-
-
-
-2. Run with Docker:This server speaks MCP-ish methods over JSON-RPC with `Content-Length` framing. It is compatible with tools that expect:
-
-```bash- `mcp/initialize`, `mcp/resources/list`, `mcp/resources/templates`, `mcp/resources/read`, `mcp/tools/list`, `mcp/tools/call`.
-
-docker run --rm -i books-mcp
-
-```If you just want to exercise functionality without an MCP client, see the test suite for direct invocation patterns.
-
-
-
-### MCP Client Configuration**Docker**
-
-- Build: `docker build -t books-mcp .`
-
-Add to your MCP client configuration:- Run (interactive stdio): `docker run --rm -i -e MCP_LOG=debug -v "$PWD/data:/app/data" books-mcp`
-
-  - The `-i` flag keeps STDIN open for MCP stdio.
-
-```json  - Mounting `./data` persists the generated CSV outside the container.
-
-{- Compose (optional): `docker compose run --rm mcp`
-
-  "mcpServers": {
-
-    "books-mcp": {**Use with MCP Clients (including Copilot/Cursor builds that support MCP)**
-
-      "command": "docker",- Command (local Python): `python` with args `[-m, mcp_server.sdk_server]`
-
-      "args": [- Command (Docker): `docker` with args `[run, --rm, -i, -v, <abs-path>/data:/app/data, books-mcp]`
-
-        "run", "--rm", "-i",- Example client config snippet (common MCP shape):
-
-        "--init",  - {
-
-        "-e", "MCP_LOG=debug",    "mcpServers": {
-
-        "-e", "PYTHONUNBUFFERED=1",      "books-mcp": {
-
-        "-v", "/path/to/MCP-server/data:/app/data",        "command": "python",
-
-        "books-mcp"        "args": ["-m", "mcp_server.server"],
-
-      ]        "env": {}
-
-    }      }
-
-  }    }
-
-}  }
-
-```- Example using Docker instead of Python:
-
-  - {
-
-## Available Tools    "mcpServers": {
-
-      "books-mcp": {
-
-### books_query        "command": "docker",
-
-Query the books database with optional filters:        "args": [
-
-- `id`: Get a specific book by ID          "run", "--rm", "-i",
-
-- `genre`: Filter by genre          "-v", "/absolute/path/to/project/data:/app/data",
-
-- `year`: Filter by publication year            "books-mcp"
-
-- `author`: Filter by author name        ]
-
-- `title`: Filter by title (partial match)      }
-
-- `limit`: Maximum number of results (default: 10)    }
-
-- `offset`: Pagination offset (default: 0)  }
-
-
-
-### exchange_convertAfter adding, restart your MCP client. It should discover tools:
-
-Convert currency amounts:- `books_query` (filters by `genre/year/author/title`, pagination; `id` to fetch one)
-
-- `from_currency`: Source currency code (e.g., "USD")- `exchange_convert` (`from_currency`, `to_currency`, `amount`)
-
-- `to_currency`: Target currency code (e.g., "EUR")
-
-- `amount`: Amount to convert**Quick Demo (No MCP client)**
-
-- This server is designed to be used by MCP-aware clients. For manual testing, use Cursor/Copilot MCP integration or add a simple stdio JSON-RPC client.
-
-## Project Structure
-
-**Use with Postman (via HTTP proxy)**
-
-```- Start the proxy (spawns the MCP server under the hood):
-
-├── mcp_server/  - `python scripts/http_proxy.py`
-
-│   ├── sdk_server.py      # Main MCP server implementation  - Opens `http://127.0.0.1:8080`.
-
-│   ├── books.py           # Books database repository- In Postman:
-
-│   ├── exchange.py        # Currency exchange functionality  - POST `http://127.0.0.1:8080/rpc` with JSON body `{ "method": "mcp/initialize", "params": {} }` (optional).
-
-│   └── util/  - GET `http://127.0.0.1:8080/resources/list`.
-
-│       └── xlsx_to_csv.py # XLSX to CSV conversion utility  - GET `http://127.0.0.1:8080/resources/read?uri=books%3A%2F%2Ffilter%3Fgenre%3DFantasy%26limit%3D3`
-
-├── data/  - POST `http://127.0.0.1:8080/tools/call` with body `{ "name": "exchange.convert", "arguments": { "from": "USD", "to": "EUR", "amount": 100 } }`.
-
-│   └── books.csv          # Books dataset  - GET `http://127.0.0.1:8080/tools/list`
-
-├── assignment/  - GET `http://127.0.0.1:8080/resources/templates`
-
-│   └── BooksDatasetClean.xlsx  # Original dataset
-
-├── Dockerfile             # Docker container configuration
-
-├── docker-compose.yml     # Docker Compose setup**Ask Copilot (when MCP-enabled)**
-
-├── mcp_config_docker.json # MCP client configuration- “Using the books-mcp server, list 5 Fantasy books.”
-
-└── requirements.txt       # Python dependencies- “Fetch the book with id 42 from the books MCP.”
-
-```- “Filter books by author ‘Harper Lee’ and year 1960.”
-
-- “Convert 100 USD to EUR using the exchange MCP tool.”
-
-## Development
-
-**Example Interactions (JSON-RPC)**
-
-The server uses the official MCP Python SDK for robust protocol handling and automatic client compatibility.- Initialize:
-  - Request: `{ "jsonrpc": "2.0", "id": 1, "method": "mcp/initialize", "params": {} }`
-  - Response: protocol version, capabilities, server info.
-- List resources:
-  - Request: `{ "jsonrpc": "2.0", "id": 2, "method": "mcp/resources/list" }`
-  - Response: `resources: [ { uri: "books://all" }, ... ]`.
-- Read filtered books:
-  - Request: `{ "jsonrpc": "2.0", "id": 3, "method": "mcp/resources/read", "params": { "uri": "books://filter?genre=Fantasy&limit=5" } }`
-  - Response: `{ contents: [{ text: "{\"data\":[...],\"count\":5}" }] }`
-- Exchange tool call:
-  - Request: `{ "jsonrpc": "2.0", "id": 4, "method": "mcp/tools/call", "params": { "name": "exchange.convert", "arguments": { "from": "USD", "to": "EUR", "amount": 100 } } }`
-  - Response: `{ result: { content: [{ text: "{\"from\":\"USD\",...}" }], isError: false } }`
-
-**Design Choices**
-- **No external deps:** A small XLSX parser converts the dataset to CSV, ensuring portability.
-- **Resources + Tools:** Exposes both, so clients can either read resources or invoke a tool for the same functionality.
-- **Filtering:** Implemented server-side with case-insensitive matching and simple pagination (`limit`, `offset`).
-
-**Testing**
-- Run tests:
-  - `python -m unittest discover -s tests -p "test_*.py" -v`
-
-**Notes & Trade-offs**
-- Protocol surface is a pragmatic subset matching common MCP expectations. If you use a strict MCP client, minor differences in capability fields or protocol version names may require slight adjustments.
-- The XLSX converter targets common cases (first sheet, shared strings). It is intentionally minimal.
+**Ready to authenticate your MCP server?** 🚀 Start with the [Getting Started Guide](docs/GETTING_STARTED.md)!
